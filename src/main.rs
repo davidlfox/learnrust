@@ -1,6 +1,7 @@
-pub(crate) use std::io;
+use std::io;
 use rand::prelude::*;
-mod player;
+mod game;
+use game::player::Player as Player;
 
 // desired behavior:
 // - input a player 1 name
@@ -20,8 +21,8 @@ fn main() -> io::Result<()> {
     let mut p2_name = String::new();
     io::stdin().read_line(&mut p2_name)?;
 
-    let mut player1 = player::Player::build(p1_name.trim().to_owned(), &mut rng);
-    let mut player2 = player::Player::build(p2_name.trim().to_owned(), &mut rng);
+    let mut player1 = Player::build(p1_name.trim().to_owned(), &mut rng);
+    let mut player2 = Player::build(p2_name.trim().to_owned(), &mut rng);
 
     print_players(&player1, &player2);
 
@@ -43,6 +44,6 @@ fn main() -> io::Result<()> {
     Ok(())
 }
 
-fn print_players(player1: &player::Player, player2: &player::Player) {
+fn print_players(player1: &Player, player2: &Player) {
     println!("{} vs {}", player1, player2);
 }

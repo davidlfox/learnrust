@@ -1,6 +1,5 @@
-use std::fmt;
-
 use rand::prelude::*;
+use std::fmt;
 
 pub struct Player {
     pub name: String, // todo: make &str
