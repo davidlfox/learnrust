@@ -21,10 +21,11 @@ impl Player {
     }
 
     pub fn build(name: String, class: Class, rng: &mut ThreadRng) -> Player {
-        Player { 
+        let hit_points = Class::hit_points(&class, rng).unwrap();
+        Player {
             name,
             class,
-            hit_points: rng.gen_range(1..=4) + 10,
+            hit_points,
             damage_roll: rng.gen_range(1..=3),
         }
     }
