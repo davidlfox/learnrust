@@ -16,12 +16,25 @@ fn main() -> io::Result<()> {
     let mut p1_name = String::new();
     io::stdin().read_line(&mut p1_name)?;
 
+    println!("Enter player 1 class [Warrior, Wizard]: ");
+    let mut p1_class = String::new();
+    io::stdin().read_line(&mut p1_class)?;
+    println!("{}", p1_class);
+    let p1_parsed_class = game::Class::from_str(&p1_class.trim()).unwrap();
+
     println!("Enter player 2 name: ");
     let mut p2_name = String::new();
     io::stdin().read_line(&mut p2_name)?;
 
-    let mut player1 = game::Player::build(p1_name.trim().to_owned(), &mut rng);
-    let mut player2 = game::Player::build(p2_name.trim().to_owned(), &mut rng);
+    println!("Enter player 2 class [Warrior, Wizard]: ");
+    let mut p2_class = String::new();
+    io::stdin().read_line(&mut p2_class)?;
+    let p2_parsed_class = game::Class::from_str(&p2_class.trim()).unwrap();
+
+    let mut player1 = game::Player::build(
+        p1_name.trim().to_owned(), p1_parsed_class, &mut rng);
+    let mut player2 = game::Player::build(
+        p2_name.trim().to_owned(), p2_parsed_class, &mut rng);
 
     print_players(&player1, &player2);
 

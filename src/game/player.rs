@@ -1,10 +1,12 @@
 use rand::prelude::*;
 use std::fmt;
+use super::Class;
 
 pub struct Player {
     pub name: String, // todo: make &str
     pub hit_points: i8,
     damage_roll: i8,
+    class: Class,
 }
 
 impl Player {
@@ -18,9 +20,10 @@ impl Player {
         self.hit_points -= damage;
     }
 
-    pub fn build(name: String, rng: &mut ThreadRng) -> Player {
+    pub fn build(name: String, class: Class, rng: &mut ThreadRng) -> Player {
         Player { 
-            name: name,
+            name,
+            class,
             hit_points: rng.gen_range(1..=4) + 10,
             damage_roll: rng.gen_range(1..=3),
         }
@@ -29,6 +32,6 @@ impl Player {
 
 impl fmt::Display for Player {
     fn fmt(&self, f:&mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{} ({}hp)", self.name, self.hit_points)
+        write!(f, "{}[{:?}] ({}hp)", self.name, self.class, self.hit_points)
     }
 }
