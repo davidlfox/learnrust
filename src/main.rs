@@ -33,8 +33,10 @@ fn main() -> io::Result<()> {
 
     let mut player1 = game::Player::build(
         p1_name.trim().to_owned(), p1_parsed_class, &mut rng);
+    player1.items.push(game::Item::build(String::from("Sword")));
     let mut player2 = game::Player::build(
         p2_name.trim().to_owned(), p2_parsed_class, &mut rng);
+    player2.items.push(game::Item::build(String::from("Staff")));
 
     print_players(&player1, &player2);
 
